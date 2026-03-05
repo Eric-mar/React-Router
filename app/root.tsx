@@ -40,7 +40,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="flex h-screen ">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -51,12 +51,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return <>
-  <nav>
-    <Link to="/">Home</Link>
-    <Link to="discover">Discover</Link>
-    <Link to="app">App</Link>
-    <Link to="setting">setting</Link>
- 
+  {/* Primary-color: #00743e 
+      Primary-light: #4c9d77 */}
+  <nav className="bg-green-400 text-white p-3  ">
+    <ul className="flex flex-col m-3  ">
+    <li><Link to="/">Home</Link> </li>
+    <li><Link to="discover">Discover</Link></li>
+    <li><Link to="app">App</Link></li>
+    <li><Link to="setting">setting</Link></li>
+ </ul>
   </nav>
   
   <Outlet /> 
