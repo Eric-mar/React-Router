@@ -10,6 +10,7 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { DiscoverIcon, HomeIcon, RecipeBookIcon, SettingsIcon } from "./components/icons";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -55,10 +56,10 @@ export default function App() {
       Primary-light: #4c9d77 */}
   <nav className="bg-green-400 text-white p-3  ">
     <ul className="flex flex-col m-3  ">
-    <li><Link to="/">Home</Link> </li>
-    <li><Link to="discover">Discover</Link></li>
-    <li><Link to="app">App</Link></li>
-    <li><Link to="setting">setting</Link></li>
+    <li><Link to="/"><HomeIcon/></Link> </li>
+    <li><Link to="discover"><DiscoverIcon/> </Link></li>
+    <li><Link to="app"><RecipeBookIcon/></Link></li>
+    <li><Link to="setting"><SettingsIcon/></Link></li>
  </ul>
   </nav>
   
