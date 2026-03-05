@@ -1,16 +1,18 @@
 import {
   isRouteErrorResponse,
   Links,
+  NavLink,
   Link,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
 } from "react-router";
-
+// import classNames from "classnames";
 import type { Route } from "./+types/root";
 import "./app.css";
 import { DiscoverIcon, HomeIcon, RecipeBookIcon, SettingsIcon } from "./components/icons";
+import classNames from "classnames";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -41,7 +43,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="flex h-screen ">
+      <body className="md:flex md:h-screen ">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -55,15 +57,16 @@ export default function App() {
   {/* Primary-color: #00743e 
       Primary-light: #4c9d77 */}
   <nav className="bg-green-400 text-white p-3  ">
-    <ul className="flex flex-col m-3  ">
-    <li><Link to="/"><HomeIcon/></Link> </li>
-    <li><Link to="discover"><DiscoverIcon/> </Link></li>
-    <li><Link to="app"><RecipeBookIcon/></Link></li>
-    <li><Link to="setting"><SettingsIcon/></Link></li>
+    <ul className="flex md:flex-col m-3  ">
+    <AppNavLink to="/"><HomeIcon/></AppNavLink> 
+    <AppNavLink to="discover"><DiscoverIcon/> </AppNavLink>
+    <AppNavLink to="app"><RecipeBookIcon/></AppNavLink>
+    <AppNavLink to="setting"><SettingsIcon/></AppNavLink>
  </ul>
   </nav>
-  
+  <div className="p-4">
   <Outlet /> 
+  </div>
   </>;
 }
 
@@ -95,3 +98,25 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     </main>
   );
 }
+type AppNavLinkProps = {
+  children: React.ReactNode
+  to: string
+}
+
+function AppNavLink({children,to}:AppNavLinkProps){
+  return(
+    <li className="w-16">
+      <NavLink to={to}>
+      {({isActive})=>(
+        <div
+        className={classNames (
+          "flex py-4 justify-center hover:bg-[#4c9d77]",
+          { "bg-[#4c9d77]":isActive, }
+        )}></div>
+      )}
+      </NavLink>
+       </li>
+
+  )
+}
+
