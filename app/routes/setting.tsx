@@ -1,5 +1,6 @@
-import{Await, Link, Outlet, useLoaderData, useLocation} from "react-router"
+import{Await, Link, Outlet, useLoaderData, useLocation,Route} from "react-router"
 import React from "react"
+
 
 
 export async function loader(){
@@ -9,7 +10,7 @@ export async function loader(){
         setTimeout(()=> resolve('this is a slow message that was created! '),3000)
     })
     
-    return{ message: "Hello, Eric!",slowMessage}
+    return { message: "Hello, Eric!",slowMessage}
 
 }
 export default function setting(){
@@ -38,4 +39,18 @@ export default function setting(){
         </div>
     )
        
+}
+
+export function ErrorBoundary({error}: Route.ErrorBoundaryProps){
+
+    if(error instanceof Error){
+        return(
+            <div className="bg-red-300 border-2 border-red-500 rounded-md p-4">
+                <h1>Whoops!, something went wrong.</h1>
+                <p>{error.message}</p>
+            </div>
+        )
+    }
+    return <div>There is Unexpected Error</div>
+
 }
