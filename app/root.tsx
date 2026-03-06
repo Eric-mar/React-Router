@@ -7,6 +7,9 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useNavigation,
+  useResolvedPath
+  
 } from "react-router";
 // import classNames from "classnames";
 import type { Route } from "./+types/root";
@@ -56,7 +59,7 @@ export default function App() {
   return <>
   {/* Primary-color: #00743e 
       Primary-light: #4c9d77 */}
-  <nav className="bg-green-400 text-white p-3  ">
+  <nav className="bg-green-400 text-white p-3 "  >
     <ul className="flex md:flex-col m-3  ">
     <AppNavLink to="/"><HomeIcon/></AppNavLink> 
     <AppNavLink to="discover"><DiscoverIcon/> </AppNavLink>
@@ -104,6 +107,12 @@ type AppNavLinkProps = {
 }
 
 function AppNavLink({children,to}:AppNavLinkProps){
+const path = useResolvedPath(to)
+  const navigation = useNavigation()
+
+  const isLoading = navigation.state === "loading" && navigation.location.pathname === path.pathname
+
+
   return(
     <li className="w-16">
       <NavLink to={to}>
@@ -111,10 +120,14 @@ function AppNavLink({children,to}:AppNavLinkProps){
         <div
         className={classNames (
           "flex py-4 justify-center hover:bg-[#4c9d77]",
-          { "bg-[#4c9d77]":isActive, }
-        )}></div>
+          { "bg-[#4c9d77]": isActive || isLoading,
+            "animate-pulse": isLoading 
+          }
+        )}>
+          {children}
+        </div>
       )}
-      </NavLink>
+      </NavLink >
        </li>
 
   )
