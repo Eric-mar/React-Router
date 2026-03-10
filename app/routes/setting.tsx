@@ -31,9 +31,9 @@ export default function setting(){
 
         
 
-        <nav>
-            <Link to="app"  >App</Link>
-            <Link  to="profile" >Profile</Link>
+        <nav className=" m-3 text-3xl    ">
+            <Link to="app"  className="p-4 hover:bg-blue-600 m-3  " >App</Link>
+            <Link  to="profile" className="hover:bg-red-600" >Profile</Link>
         </nav>
         <Outlet/>
         </div>
